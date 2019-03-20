@@ -4,11 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
-public class EnvironmentManagerMac {
-
-    private static String driverPath = System.getenv("driverPath");
-    private static WebDriver driver;
-
+public class EnvironmentManagerMac extends EnvironmentManager {
 
     public static void initChromeWebDriver() {
 

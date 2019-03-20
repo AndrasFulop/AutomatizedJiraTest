@@ -1,6 +1,7 @@
 package pageFactory;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -9,12 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class ComponentPage {
-    private WebDriver driver;
-    private WebDriverWait wait;
-    private NavigateToPages navigateToPages;
-
-    private static final int TIMEOUT = 10;
+public class ComponentPage extends PageObject{
 
     @FindBy(xpath = ".//form[@id='components-add__component']/div[@class='components-add__confirm']/button")
     private WebElement addComponentButton;
@@ -38,10 +34,7 @@ public class ComponentPage {
     private By submitButtonOnDeleteForm = By.xpath("//input[@id='submit']");
 
     public ComponentPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
-        wait = new WebDriverWait(this.driver, TIMEOUT);//, POLLING);
-        navigateToPages = new NavigateToPages(this.driver);
+        super(driver);
     }
 
     public void setComponentName(String componentName) {

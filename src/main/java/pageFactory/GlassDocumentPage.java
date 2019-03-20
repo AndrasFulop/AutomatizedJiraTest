@@ -1,6 +1,7 @@
 package pageFactory;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.FindBys;
 import org.openqa.selenium.support.PageFactory;
@@ -10,7 +11,7 @@ import util.Utils;
 
 import java.util.List;
 
-public class GlassDocumentPage {
+public class GlassDocumentPage extends PageObject{
     private WebDriver driver;
     private WebDriverWait wait;
     private NavigateToPages navigateToPages;
@@ -33,11 +34,7 @@ public class GlassDocumentPage {
     //@FindBys(@FindBy)
 
     public GlassDocumentPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(this.driver, this);
-        wait = new WebDriverWait(this.driver, TIMEOUT, POLLING);
-        navigateToPages = new NavigateToPages(this.driver);
-        componentPage = new ComponentPage(this.driver);
+        super(driver);
     }
 
     /*** Component Form ***/

@@ -32,17 +32,29 @@ public class Utils {
                 //driver.manage().window().maximize();
             }
 
-        } else {
-
+        }else if(OS.isFamilyWindows()){
             if (System.getenv("myDriver").equals("chrome")){
                 System.out.println("3*******************");
                 System.out.println("Launching chrome browser");
-                EnvironmentManagerWin.initChromeWebDriver();
+                EnvironmentManagerWin.initChromeRemoteWebDriver();
 
             }else {
                 System.out.println("4*******************");
                 System.out.println("Launching firefox browser");
-                EnvironmentManagerWin.initFireFoxWebDriver();
+                EnvironmentManagerWin.initFireFoxRemoteWebDriver();
+
+            }
+        }else {
+
+            if (System.getenv("myDriver").equals("chrome")){
+                System.out.println("3*******************");
+                System.out.println("Launching chrome browser");
+                EnvironmentManagerLinux.initChromeRemoteWebDriver();
+
+            }else {
+                System.out.println("4*******************");
+                System.out.println("Launching firefox browser");
+                EnvironmentManagerLinux.initFireFoxRemoteWebDriver();
 
             }
         }
