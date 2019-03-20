@@ -18,33 +18,16 @@ public class Utils {
      * myDriver
      */
     public static void setup() {
-        if (OS.isFamilyMac()) {
-
-            if (System.getenv("myDriver").equals("chrome")){
-                System.out.println("1*******************");
-                System.out.println("Launching chrome browser");
-                EnvironmentManagerMac.initChromeWebDriver();
-                //driver.manage().window().maximize();
-            }else {
-                System.out.println("2*******************");
-                System.out.println("Launching firefox browser");
-                EnvironmentManagerMac.initFireFoxWebDriver();
-                //driver.manage().window().maximize();
-            }
-
-        } else {
-
-            if (System.getenv("myDriver").equals("chrome")){
+        if (System.getenv("myDriver").equals("chrome")){
                 System.out.println("3*******************");
                 System.out.println("Launching chrome browser");
-                EnvironmentManagerWin.initChromeRemoteWebDriver();
+                EnvironmentManager.initChromeRemoteWebDriver();
 
-            }else {
+        } else {
                 System.out.println("4*******************");
                 System.out.println("Launching firefox browser");
-                EnvironmentManagerWin.initFireFoxRemoteWebDriver();
+                EnvironmentManager.initFireFoxRemoteWebDriver();
 
-            }
         }
     }
 
