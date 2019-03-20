@@ -1,12 +1,20 @@
 package util;
 
 import org.openqa.selenium.Platform;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class EnvironmentManagerLinux extends EnvironmentManager{
-    private static String nodeUrl = "http://192.168.160.66:5566/wd/hub";
+    protected static WebDriver driver;
+    protected static String driverPath = System.getenv("driverPath");
+    protected static DesiredCapabilities capability;
+    public static String nodeUrl = "http://http://192.168.160.66:4444/wd/hub";
 
 
     public static void initChromeWebDriver() {
@@ -20,8 +28,8 @@ public class EnvironmentManagerLinux extends EnvironmentManager{
     public static void initChromeRemoteWebDriver(){
         capability = DesiredCapabilities.chrome();
         capability.setBrowserName("chrome");
-        capability.setPlatform(Platform.LINUX);
         setDriver(capability,nodeUrl);
+        RunEnvironment.setWebDriver(driver);
     }
 
     public static void initFireFoxWebDriver() {
@@ -34,7 +42,23 @@ public class EnvironmentManagerLinux extends EnvironmentManager{
     public static void initFireFoxRemoteWebDriver() {
         capability = DesiredCapabilities.firefox();
         capability.setBrowserName("firefox");
-        capability.setPlatform(Platform.LINUX);
         setDriver(capability, nodeUrl);
+        RunEnvironment.setWebDriver(driver);
     }
+    protected static void setDriver(DesiredCapabilities capability,String nodeUrl){
+        try {
+            driver = new RemoteWebDriver(new URL(nodeUrl), capability);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void shutDownDriver() {
+        if(driver!=null) {
+            System.out.println("Closing browser");
+            RunEnvironment.getWebDriver().quit();
+        }
+
+    }
+
 }

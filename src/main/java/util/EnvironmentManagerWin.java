@@ -11,7 +11,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class EnvironmentManagerWin extends EnvironmentManager {
-    private static String nodeUrl = "http://192.168.160.66:5566/wd/hub";
+    public static String nodeUrl = "http://192.168.160.66:4444/wd/hub";
+    protected static WebDriver driver;
+    protected static String driverPath = System.getenv("driverPath");
+    protected static DesiredCapabilities capability;
 
 
     public static void initChromeWebDriver() {
@@ -25,8 +28,12 @@ public class EnvironmentManagerWin extends EnvironmentManager {
     public static void initChromeRemoteWebDriver(){
         capability = DesiredCapabilities.chrome();
         capability.setBrowserName("chrome");
-        capability.setPlatform(Platform.WINDOWS);
-        setDriver(capability,nodeUrl);
+        try {
+            driver = new RemoteWebDriver(new URL(nodeUrl), capability);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        RunEnvironment.setWebDriver(driver);
     }
 
     public static void initFireFoxWebDriver() {
@@ -39,8 +46,21 @@ public class EnvironmentManagerWin extends EnvironmentManager {
     public static void initFireFoxRemoteWebDriver() {
         capability = DesiredCapabilities.firefox();
         capability.setBrowserName("firefox");
-        capability.setPlatform(Platform.WINDOWS);
-        setDriver(capability, nodeUrl);
+        try {
+            driver = new RemoteWebDriver(new URL(nodeUrl), capability);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        RunEnvironment.setWebDriver(driver);
+    }
+
+
+    public static void shutDownDriver() {
+        if(driver!=null) {
+            System.out.println("Closing browser");
+            RunEnvironment.getWebDriver().quit();
+        }
+
     }
 
 }
