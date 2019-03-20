@@ -87,10 +87,6 @@
                         <version>5.2.0</version>
                     </dependency>
 
-                    <dependency>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-compiler-plugin</artifactId>
-                    </dependency>
                 </dependencies>
             </plugin>
         </plugins>
