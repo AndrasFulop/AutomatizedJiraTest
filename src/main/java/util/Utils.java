@@ -32,11 +32,7 @@ public class Utils {
     }
 
     public  static void tearDown() {
-        if (OS.isFamilyMac()) {
-            EnvironmentManagerMac.shutDownDriver();
-        } else {
-            EnvironmentManagerWin.shutDownDriver();
-        }
+        EnvironmentManager.shutDownDriver();
     }
 
     /**
